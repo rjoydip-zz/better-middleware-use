@@ -10,7 +10,7 @@ The next function is a function in the Express router which, when invoked, execu
 
 The `request-response cycle` ends when you call `res.send()` or `res.end()`.
 
-## Why middleware needed in application?
+## Why middleware needed in the application?
 
 - Execute any code on every request.
 - Make changes to the request and the response objects.
@@ -66,11 +66,11 @@ app.listen(8080, () => {
 
 The global `middleware` will be called for each `request`. It's better to `keep clean`, as `minimum` as use, always be `async`, avoid `complex computation`.
 
-If any computation needed accross multiple routes it should apply on routes.
+If any computation needed across multiple routes it should apply on routes.
 
 ## Should or shouldn't
 
-- If any middleware perform based on some condition better to use condition outside middleware.
+- If any middleware performs based on some condition better to use condition outside middleware.
 
 ```js
 // bad
