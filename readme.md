@@ -68,14 +68,15 @@ The global `middleware` will be called for each `request`. It's better to `keep 
 
 If any computation needed accross multiple routes it should apply on routes.
 
-> **Note:** If any middleware perform based on some condition better to use condition outside middleware.
+## Should or shouldn't
+
+- If any middleware perform based on some condition better to use condition outside middleware.
 
 ```js
 // bad
 app.use((req, res, next) => {
-    if(some condition) {
-
-    }
+    if(some condition) {} 
+    else {}
     next();
 });
 
@@ -85,6 +86,29 @@ if(condition) {
         next();
     });
 }
+```
+
+- Always add configuration/metadata outside middleware.
+
+```js
+// bad
+app.use((req, res, next) => {
+    app.config = {
+        PORT: 3000,
+        ENV: process.env.NODE_ENV || 'development',
+        HOST: '127.0.0.1'
+    };
+    next();
+});
+// good
+app.config = {
+    PORT: 3000,
+    ENV: process.env.NODE_ENV || 'development',
+    HOST: '127.0.0.1'
+};
+app.use((req, res, next) => {
+    next();
+});
 ```
 
 ## License
